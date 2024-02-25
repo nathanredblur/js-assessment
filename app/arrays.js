@@ -1,59 +1,122 @@
+/* eslint-disable valid-jsdoc */
 exports = typeof window === 'undefined' ? global : window;
 
 exports.arraysAnswers = {
-  indexOf: function(arr, item) {
 
+  /**
+  * @param {Array} arr
+  */
+  indexOf(arr, item) {
+    return arr.indexOf(item);
   },
 
-  sum: function(arr) {
-
+  /**
+  * @param {Array} arr
+  */
+  sum(arr) {
+    return arr.reduce((previous, current) => current + previous, 0);
   },
 
-  remove: function(arr, item) {
-
+  /**
+  * @param {Array} arr
+  */
+  remove(arr, item) {
+    return arr.reduce((previous, current) => (current != item ? [...previous, current] : previous), []);
   },
 
-  removeWithoutCopy: function(arr, item) {
-
+  /**
+  * @param {Array} arr
+  */
+  removeWithoutCopy(arr, item) {
+    for (let i = arr.length - 1; i >= 0; i--) {
+      if (arr[i] === item) {
+        arr.splice(i, 1);
+      }
+    }
+    return arr;
   },
 
-  append: function(arr, item) {
-
+  /**
+  * @param {Array} arr
+  */
+  append(arr, item) {
+    return [...arr, item];
   },
 
-  truncate: function(arr) {
-
+  /**
+  * @param {Array} arr
+  */
+  truncate(arr) {
+    return arr.slice(0, -1);
   },
 
-  prepend: function(arr, item) {
-
+  /**
+  * @param {Array} arr
+  */
+  prepend(arr, item) {
+    return [item, ...arr];
   },
 
-  curtail: function(arr) {
-
+  /**
+  * @param {Array} arr
+  */
+  curtail(arr) {
+    return arr.slice(1);
   },
 
-  concat: function(arr1, arr2) {
-
+  /**
+  * @param {Array} arr
+  */
+  concat(arr1, arr2) {
+    return [...arr1, ...arr2];
   },
 
-  insert: function(arr, item, index) {
-
+  /**
+  * @param {Array} arr
+  */
+  insert(arr, item, index) {
+    const newArry = [...arr];
+    newArry.splice(index, 0, item);
+    return newArry;
   },
 
-  count: function(arr, item) {
-
+  /**
+  * @param {Array} arr
+  */
+  count(arr, item) {
+    const filtered = arr.filter((el) => el === item);
+    return filtered.length;
   },
 
-  duplicates: function(arr) {
+  /**
+  * @param {Array} arr
+  */
+  duplicates(arr) {
+    const uniques = new Set();
+    const duplicates = new Set();
+    arr.map((el) => {
+      if (uniques.has(el)) {
+        duplicates.add(el);
+      } else {
+        uniques.add(el);
+      }
+    });
 
+    return Array.from(duplicates);
   },
 
-  square: function(arr) {
-
+  /**
+  * @param {Array} arr
+  */
+  square(arr) {
+    const result = [...arr];
+    return result.map((el) => el ** 2);
   },
 
-  findAllOccurrences: function(arr, target) {
-
-  }
+  /**
+  * @param {Array} arr
+  */
+  findAllOccurrences(arr, target) {
+    return arr.reduce((previous, current, index) => (current === target ? [...previous, index] : previous), []);
+  },
 };
