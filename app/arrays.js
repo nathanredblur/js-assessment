@@ -21,7 +21,10 @@ exports.arraysAnswers = {
   * @param {Array} arr
   */
   remove(arr, item) {
-    return arr.reduce((previous, current) => (current != item ? [...previous, current] : previous), []);
+    return arr.reduce((previous, current) => {
+      if (current === item) { return previous; }
+      return [...previous, current];
+    }, []);
   },
 
   /**
@@ -94,7 +97,7 @@ exports.arraysAnswers = {
   duplicates(arr) {
     const uniques = new Set();
     const duplicates = new Set();
-    arr.map((el) => {
+    arr.forEach((el) => {
       if (uniques.has(el)) {
         duplicates.add(el);
       } else {
@@ -117,6 +120,11 @@ exports.arraysAnswers = {
   * @param {Array} arr
   */
   findAllOccurrences(arr, target) {
-    return arr.reduce((previous, current, index) => (current === target ? [...previous, index] : previous), []);
+    return arr.reduce(
+      (previous, current, index) => {
+        if (current === target) { return [...previous, index]; }
+        return previous;
+      }, []
+    );
   },
 };

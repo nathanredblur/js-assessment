@@ -13,7 +13,6 @@ exports.asyncAnswers = {
     const response = await fetch(url);
     const data = await response.json();
     const { people } = data;
-    console.log(people);
     return people.map((person) => person.name).sort();
   },
 };
