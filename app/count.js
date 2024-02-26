@@ -5,25 +5,21 @@ class Counter {
     this.starNumber = startNumber;
     this.endNumber = endNumber;
     this.count = startNumber;
-    this.start();
+    this.run();
   }
-  start() {
-    this.interval = setInterval(() => {
-      console.log(this.count);
+  run() {
+    console.info(this);
+    console.log(this.count);
+    if (this.count < this.endNumber) {
       this.count += 1;
-      if (this.count > this.endNumber) {
-        this.cancel();
-      }
-    }, 100);
+      this.timeout = setTimeout(this.run.bind(this), 100);
+    }
   }
   cancel() {
-    this.interval && clearInterval(this.interval);
+    clearTimeout(this.timeout);
   }
 }
 
 exports.countAnswers = {
-  count: (start, end) => {
-    const counter = new Counter(start, end);
-    return counter;
-  }
+  count: (start, end) => new Counter(start, end),
 };
